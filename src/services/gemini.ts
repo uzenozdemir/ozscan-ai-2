@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // API Key placeholder - Ozdemir will paste here
-const OZSCAN_GEMINI_KEY = "AIzaSyDnHfWG1nXew5E3Q-nTZfLqOSHyp3T83zw"; // Ozdemir will paste here
+const OZSCAN_GEMINI_KEY = "AIzaSyCUw2Bz2_3LQwPRjaIO7Bog-_ZX53i_RxA"; // Ozdemir will paste here
 
 interface AnalysisResult {
   supplyChainScore: number;
