@@ -90,39 +90,28 @@ Return ONLY valid JSON, no other text.
 function simulateAnalysis(brandName: string, deepScan: boolean): AnalysisResult {
   // Generate semi-random but consistent scores based on brand name
   const hash = brandName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const base = (hash % 30) + 55; // 55-85 range
+  const base = (hash % 20) + 10; // ARTIK 10-30 ARALIĞINDA (TEST İÇİN DÜŞÜRÜLDÜ)
   
-  const supplyChainScore = Math.min(100, base + (hash % 15));
-  const carbonScore = Math.min(100, base + ((hash * 2) % 20));
-  const laborScore = Math.min(100, base + ((hash * 3) % 18));
-  const sentimentScore = Math.min(100, base + ((hash * 4) % 22));
+  const supplyChainScore = Math.min(100, base + (hash % 10));
+  const carbonScore = Math.min(100, base + ((hash * 2) % 10));
+  const laborScore = Math.min(100, base + ((hash * 3) % 10));
+  const sentimentScore = Math.min(100, base + ((hash * 4) % 10));
   const overallScore = Math.round((supplyChainScore + carbonScore + laborScore + sentimentScore) / 4);
 
-  const details = deepScan ? {
-    supplyChain: `${brandName} demonstrates ${supplyChainScore > 70 ? 'good' : 'moderate'} supply chain transparency. Manufacturing facilities are primarily located in certified regions with regular third-party audits. Tier 1 suppliers are fully disclosed, though Tier 2+ visibility remains limited.`,
-    carbon: `Carbon footprint analysis indicates ${carbonScore > 70 ? 'above-average' : 'average'} environmental performance. The company has committed to carbon neutrality by 2030 with verified reduction initiatives. Current emissions tracking shows ${carbonScore > 75 ? 'positive' : 'ongoing'} progress toward stated goals.`,
-    labor: `Worker welfare assessment shows ${laborScore > 70 ? 'strong' : 'acceptable'} labor practices. Fair wage certifications are in place for ${laborScore}% of the supply chain. Regular audits ensure compliance with international labor standards.`,
-    sentiment: `Consumer sentiment analysis across social platforms indicates ${sentimentScore > 70 ? 'positive' : 'mixed'} brand perception. ${sentimentScore}% positive mentions regarding sustainability efforts. Customer trust index trending ${sentimentScore > 75 ? 'upward' : 'stable'}.`,
-  } : {
-    supplyChain: `${brandName} shows ${supplyChainScore > 70 ? 'good' : 'moderate'} supply chain transparency with regular audits.`,
-    carbon: `Environmental impact rated at ${carbonScore}/100 with ongoing sustainability initiatives.`,
-    labor: `Labor practices score ${laborScore}/100 with fair wage certifications in major facilities.`,
-    sentiment: `Consumer sentiment is ${sentimentScore > 70 ? 'positive' : 'mixed'} with ${sentimentScore}% favorable mentions.`,
+  const details = {
+    supplyChain: `[SİMÜLASYON] ${brandName} için gerçek veri çekilemedi.`,
+    carbon: `[SİMÜLASYON] Gemini bağlantısı kurulamadı, puanlar düşük.`,
+    labor: `[SİMÜLASYON] Lütfen API anahtarını kontrol edin.`,
+    sentiment: `[SİMÜLASYON] Şu an gösterilen veriler gerçek analiz değildir.`,
   };
 
   const recommendations = [
-    overallScore < 70 ? 'Consider requesting detailed sustainability reports before purchasing' : 'Brand meets most sustainability criteria for conscious purchasing',
-    carbonScore < 70 ? 'Look for carbon-neutral alternatives in this category' : 'Carbon footprint is within acceptable ranges',
-    laborScore < 75 ? 'Verify fair trade certifications when available' : 'Labor practices align with ethical standards',
+    'Gemini API anahtarınızı kontrol edin',
+    'Vercel Environment Variables ayarlarını doğrulayın',
+    'İnternet bağlantınızı kontrol edin',
   ];
 
-  const sources = [
-    'Public sustainability reports',
-    'Third-party certification databases',
-    'Social media sentiment analysis',
-    'Supply chain transparency indexes',
-    deepScan ? 'Deep web data aggregation' : '',
-  ].filter(Boolean);
+  const sources = ['Sistem Simülasyonu (Hata Modu)'];
 
   return {
     supplyChainScore,
